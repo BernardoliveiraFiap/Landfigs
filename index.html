@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!--
+      SEO: ao definir o domínio final, troque "https://craquebox.vercel.app"
+      aqui, em public/robots.txt e em public/sitemap.xml.
+    -->
+    <title>CraqueBox · Figurinhas da Copa 2026 · 48 seleções, Legends e escudos</title>
+    <meta
+      name="description"
+      content="CraqueBox: figurinhas avulsas da Copa 2026. As 48 seleções, Legends e variações raras, escudos, mascotes e estádios. Monte sua lista e feche o pedido direto no WhatsApp."
+    />
+    <link rel="canonical" href="https://craquebox.vercel.app/" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+    <meta name="theme-color" content="#ffffff" />
+    <meta name="author" content="CraqueBox" />
+
+    <!-- Open Graph (WhatsApp, Facebook, LinkedIn) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="CraqueBox" />
+    <meta property="og:title" content="CraqueBox · Figurinhas da Copa 2026" />
+    <meta
+      property="og:description"
+      content="As 48 seleções, Legends e variações raras, escudos, mascotes e estádios. Monte sua lista e feche o pedido no WhatsApp."
+    />
+    <meta property="og:url" content="https://craquebox.vercel.app/" />
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:image" content="https://craquebox.vercel.app/og-image.jpg" />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="CraqueBox · Figurinhas da Copa 2026" />
+
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="CraqueBox · Figurinhas da Copa 2026" />
+    <meta
+      name="twitter:description"
+      content="As 48 seleções, Legends e variações raras, escudos e estádios. Pedido no WhatsApp."
+    />
+    <meta name="twitter:image" content="https://craquebox.vercel.app/og-image.jpg" />
+    <meta name="twitter:image:alt" content="CraqueBox · Figurinhas da Copa 2026" />
+
+    <!-- Ícones e PWA -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <!-- Dados estruturados (Google). Bloco de dados ld+json não é script executável,
+         então passa pelo CSP script-src 'self' sem precisar de 'unsafe-inline'. -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            "@id": "https://craquebox.vercel.app/#organization",
+            "name": "CraqueBox",
+            "url": "https://craquebox.vercel.app/",
+            "logo": "https://craquebox.vercel.app/icon-512.png",
+            "image": "https://craquebox.vercel.app/og-image.jpg",
+            "description": "Figurinhas avulsas da Copa 2026: as 48 seleções, Legends e variações raras, escudos, mascotes e estádios. Pedido fechado no WhatsApp.",
+            "contactPoint": {
+              "@type": "ContactPoint",
+              "telephone": "+5511939429746",
+              "contactType": "customer service",
+              "areaServed": "BR",
+              "availableLanguage": ["Portuguese"]
+            },
+            "sameAs": ["https://wa.me/5511939429746"]
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://craquebox.vercel.app/#website",
+            "url": "https://craquebox.vercel.app/",
+            "name": "CraqueBox",
+            "inLanguage": "pt-BR",
+            "publisher": { "@id": "https://craquebox.vercel.app/#organization" }
+          }
+        ]
+      }
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

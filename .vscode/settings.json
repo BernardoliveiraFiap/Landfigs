@@ -1,0 +1,6 @@
+{
+  "//": "Tailwind v4 usa diretivas (@theme, @utility, @apply, @import) que o validador de CSS embutido do VS Code não conhece. Silenciamos o falso alarme aqui. Para IntelliSense completo, instale a extensão recomendada (bradlc.vscode-tailwindcss).",
+  "css.lint.unknownAtRules": "ignore",
+  "scss.lint.unknownAtRules": "ignore",
+  "less.lint.unknownAtRules": "ignore"
+}
