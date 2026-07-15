@@ -1,3 +1,6 @@
+# craquebox.com
+
+
 # CraqueBox — Figurinhas da Copa 2026
 
 Landing page "sabor site" para venda de figurinhas avulsas da Copa 2026.
