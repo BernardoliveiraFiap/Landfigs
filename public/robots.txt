@@ -1,0 +1,12 @@
+# CraqueBox · figurinhas da Copa 2026
+# Site institucional/comercial: tudo pode ser indexado.
+User-agent: *
+Allow: /
+
+# Bots de IA que respeitam robots.txt (opcional: descomente para bloquear)
+# User-agent: GPTBot
+# Disallow: /
+# User-agent: CCBot
+# Disallow: /
+
+Sitemap: https://craquebox.vercel.app/sitemap.xml
