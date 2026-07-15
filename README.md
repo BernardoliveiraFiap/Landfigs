@@ -76,14 +76,16 @@ compartilhamento em `public/og-image.jpg`), `robots.txt`, `sitemap.xml`,
 `site.webmanifest` (ícones para "adicionar à tela inicial") e dados estruturados
 JSON-LD (Organization + WebSite) em [`index.html`](index.html).
 
-**Antes de publicar**, se o seu domínio final não for `craquebox.vercel.app`,
-faça um localizar-e-substituir de `https://craquebox.vercel.app` nestes 3 arquivos:
+O domínio de produção é `craquebox.com`, já configurado em canonical, Open Graph,
+JSON-LD, `robots.txt` e `sitemap.xml`. Se um dia mudar, faça um localizar-e-substituir
+de `https://craquebox.com` nestes 3 arquivos:
 
 - [`index.html`](index.html) (canonical, og:url, og:image, JSON-LD)
 - [`public/robots.txt`](public/robots.txt) (linha `Sitemap:`)
 - [`public/sitemap.xml`](public/sitemap.xml) (`<loc>`)
 
-Depois de no ar, envie o `sitemap.xml` ao Google Search Console.
+Depois de no ar, adicione a propriedade `craquebox.com` no Google Search Console e
+envie o sitemap (`https://craquebox.com/sitemap.xml`).
 
 ## Segurança
 
