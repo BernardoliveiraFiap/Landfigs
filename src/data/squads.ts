@@ -4,7 +4,8 @@ import type { Squad } from './types'
 /**
  * Elencos oficiais dos 4 semifinalistas da Copa 2026 (convocações de
  * maio/junho de 2026 — fontes: fifa.com, rfef.es, englandfootball.com).
- * Qualquer jogador destas seleções tem o preço SITE.prices.playerSemifinalist.
+ * Jogadores destas seleções custam SITE.prices.playerSemifinalist, exceto os
+ * super-craques com preço individual em SITE.prices.superCraques.
  */
 export const SQUADS: readonly Squad[] = deepFreeze([
   {

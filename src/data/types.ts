@@ -2,6 +2,9 @@ export type Position = 'GOL' | 'DEF' | 'MEI' | 'ATA'
 
 export type Confederation = 'UEFA' | 'CONMEBOL' | 'CONCACAF' | 'CAF' | 'AFC' | 'OFC'
 
+/** Faixa de raridade do escudo cromado — os valores de R$ ficam em SITE.prices.badge. */
+export type BadgeTier = 'raro' | 'mediano' | 'comum'
+
 export interface Team {
   namePt: string
   /** Código de bandeira do flagcdn (ex.: 'br', 'gb-eng'), também usado em /public/flags. */
@@ -9,6 +12,8 @@ export interface Team {
   /** Grupo A–L na fase de grupos. */
   group: string
   confed: Confederation
+  /** Faixa de preço do escudo cromado da seleção. */
+  badgeTier: BadgeTier
 }
 
 export interface Player {
@@ -55,7 +60,7 @@ export interface LegendPlayer {
   aliases?: readonly string[]
 }
 
-export type CatalogKind = 'player-semi' | 'player-regular' | 'badge' | 'special' | 'legend'
+export type CatalogKind = 'player-semi' | 'player-regular' | 'badge' | 'special' | 'legend' | 'fwc'
 
 export interface CatalogItem {
   id: string

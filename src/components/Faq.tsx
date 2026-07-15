@@ -3,7 +3,11 @@ import { formatBRL } from '../lib/format'
 import { SectionHeading } from './SectionHeading'
 import { IconPlus } from './icons'
 
+const regularPrice = formatBRL(SITE.prices.playerRegular)
+const scarcePrice = formatBRL(SITE.prices.playerScarce)
 const semiPrice = formatBRL(SITE.prices.playerSemifinalist)
+const brazilPrice = formatBRL(SITE.prices.playerBrazil)
+const viniPrice = formatBRL(SITE.prices.superCraques['pl:br:vini-jr'])
 
 const FAQS: ReadonlyArray<readonly [string, string]> = [
   [
@@ -27,8 +31,12 @@ const FAQS: ReadonlyArray<readonly [string, string]> = [
     'Depende do seu CEP: calculamos na hora pelo WhatsApp. As figurinhas viajam em envelope reforçado com plástico e papelão.',
   ],
   [
-    `Por que jogadores dos semifinalistas custam ${semiPrice}?`,
-    `França, Espanha, Inglaterra e Argentina estão na reta final e são as figurinhas mais procuradas do momento. O preço é fixo e tabelado: qualquer jogador dessas 4 seleções sai por ${semiPrice}, do goleiro reserva ao camisa 10.`,
+    'Como funciona a tabela de preços?',
+    `Tudo fixo e tabelado, sem leilão: jogador comum sai por ${regularPrice} e os apontados pela comunidade como difíceis de tirar, por ${scarcePrice}. Jogadores de França, Espanha, Inglaterra e Argentina (semifinalistas) custam ${semiPrice}. Super-craques como Messi, Cristiano Ronaldo, Mbappé e Lamine Yamal têm preço individual, sempre marcado na figurinha. No Brasil, qualquer jogador sai por ${brazilPrice}, com uma única exceção: Vini Jr, por ${viniPrice}.`,
+  ],
+  [
+    'Por que alguns escudos custam mais que outros?',
+    'Os escudos cromados não aparecem nos pacotes com a mesma frequência. Os 6 mais difíceis (Brasil, Turquia, Suécia, República Tcheca, Bósnia e RD do Congo) formam a faixa rara; potências muito procuradas ficam na faixa do meio; os demais, na faixa comum. O preço aparece no card de cada seleção.',
   ],
   [
     'É seguro comprar por aqui?',

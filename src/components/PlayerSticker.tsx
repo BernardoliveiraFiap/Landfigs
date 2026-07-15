@@ -1,4 +1,4 @@
-import { SITE } from '../config/site'
+import { priceOf } from '../data/catalog'
 import type { Player, Squad } from '../data/types'
 import { formatBRL } from '../lib/format'
 import { AddControl } from './AddControl'
@@ -18,7 +18,7 @@ interface Props {
  */
 export function PlayerSticker({ squad, player, eager = false }: Props) {
   const id = `sf:${squad.iso}:${player.number}`
-  const price = SITE.prices.playerSemifinalist
+  const price = priceOf(id)
   const frame = player.star
     ? 'bg-linear-to-br from-gold-300 via-gold-500 to-gold-200 shadow-pop'
     : 'bg-line shadow-card'
@@ -64,7 +64,7 @@ export function PlayerSticker({ squad, player, eager = false }: Props) {
         </div>
 
         <div className="z-[2] flex items-center justify-between gap-1 bg-paper px-2.5 py-2">
-          <span className="text-sm font-extrabold">{formatBRL(price)}</span>
+          <span className="text-sm font-extrabold text-ink">{formatBRL(price)}</span>
           <AddControl
             id={id}
             price={price}

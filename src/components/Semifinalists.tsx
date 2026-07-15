@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { SITE } from '../config/site'
+import { priceOf } from '../data/catalog'
 import { SQUADS } from '../data/squads'
 import type { Position } from '../data/types'
 import { useCart } from '../hooks/useCart'
@@ -22,7 +23,8 @@ export function Semifinalists() {
   const { add } = useCart()
 
   const squad = SQUADS.find((s) => s.iso === iso) ?? SQUADS[0]
-  const price = SITE.prices.playerSemifinalist
+  const basePrice = SITE.prices.playerSemifinalist
+  const squadTotal = squad.players.reduce((acc, p) => acc + priceOf(`sf:${squad.iso}:${p.number}`), 0)
   const players = pos === 'ALL' ? squad.players : squad.players.filter((p) => p.position === pos)
 
   function addFullSquad() {
@@ -36,11 +38,11 @@ export function Semifinalists() {
           kicker="Oferta da reta final"
           title={
             <>
-              Qualquer jogador dos 4 semifinalistas por{' '}
-              <span className="text-gradient-ouro">{formatBRL(price)}</span>
+              Jogadores dos 4 semifinalistas a partir de{' '}
+              <span className="text-gradient-ouro">{formatBRL(basePrice)}</span>
             </>
           }
-          sub="França, Espanha, Inglaterra e Argentina com os 26 convocados oficiais de cada seleção. Escolha pelo nome e pelo número da camisa."
+          sub="França, Espanha, Inglaterra e Argentina com os 26 convocados oficiais de cada seleção. Escolha pelo nome e pelo número da camisa. Super-craques como Messi, Mbappé e Lamine Yamal têm preço próprio, marcado na figurinha."
         />
 
         <div className="mt-10 flex flex-wrap items-end justify-between gap-x-6 gap-y-5 border-b border-line pb-px">
@@ -105,7 +107,7 @@ export function Semifinalists() {
             className="btn gap-1.5 border-2 border-gold-400 bg-gold-100 px-4 py-2 text-xs font-black tracking-wide text-gold-700 uppercase hover:bg-gold-200"
           >
             <IconPlus className="size-3.5" />
-            Elenco completo · {formatBRL(squad.players.length * price)}
+            Elenco completo · {formatBRL(squadTotal)}
           </button>
         </div>
 

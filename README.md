@@ -25,20 +25,33 @@ npm run preview   # serve o build local
 
 ## Onde mudar preço, número do WhatsApp e limites
 
-**Um único arquivo:** [`src/config/site.ts`](src/config/site.ts).
-Preços (incluindo as 4 variações de Legends), número do WhatsApp, limites do
-carrinho e throttle do checkout vivem somente ali (objeto congelado).
-Nenhum outro arquivo contém esses valores.
+**Os valores em R$ vivem só em** [`src/config/site.ts`](src/config/site.ts)
+(objeto congelado): jogador base (comum/escasso/semifinalista/Brasil), tabela
+individual de super-craques, escudo por faixa (raro/mediano/comum), cartas FWC,
+mascotes, taça, estádios e a matriz de Legends (craque × cor). Também ali ficam
+número do WhatsApp, limites do carrinho e throttle do checkout.
+
+Duas classificações (quem entra em cada faixa, não o preço) ficam nos dados:
+- **Faixa do escudo cromado de cada seleção:** campo `badgeTier` em
+  [`src/data/teams.ts`](src/data/teams.ts).
+- **Quais jogadores comuns são "difíceis de tirar" (R$3):** lista em
+  [`src/data/scarce.ts`](src/data/scarce.ts) (hoje vazia — ver comentário no arquivo).
+
+Quem resolve o preço final de cada item é [`src/data/catalog.ts`](src/data/catalog.ts),
+na ordem: super-craque → Brasil → escasso → base. Ele valida em dev que todo
+super-craque/escasso aponta para um jogador real do álbum.
 
 ## Estrutura de dados
 
 | Arquivo | Conteúdo |
 | --- | --- |
-| `src/data/teams.ts` | As 48 seleções classificadas, com grupo e confederação |
+| `src/data/teams.ts` | As 48 seleções, com grupo, confederação e faixa do escudo (`badgeTier`) |
 | `src/data/squads.ts` | Elencos oficiais dos 4 semifinalistas (26 jogadores cada) |
+| `src/data/albumPlayers.ts` | Jogadores base das outras 44 seleções |
+| `src/data/scarce.ts` | Jogadores comuns "difíceis de tirar" (R$3) — hoje vazio |
 | `src/data/legends.ts` | As 20 Panini Extra Stickers (Legends) e as 4 variações de cor |
+| `src/data/fwc.ts` | Cartas FWC (seção de abertura), preço por número vindo de `site.ts` |
 | `src/data/specials.ts` | Mascotes, taça dourada e os 16 estádios-sede |
-| `src/data/schedule.ts` | Cronograma das semifinais, 3º lugar e final |
 | `src/data/catalog.ts` | Catálogo derivado — todo item vendável, com preço vindo de `site.ts` |
 
 Tipos de figurinha à venda: jogadores dos 4 semifinalistas (um a um), jogador

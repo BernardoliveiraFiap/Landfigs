@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { SITE } from '../config/site'
+import { legendPrice } from '../data/catalog'
 import { LEGENDS, LEGEND_VARIANTS, type LegendVariantInfo } from '../data/legends'
 import type { LegendPlayer } from '../data/types'
 import { formatBRL } from '../lib/format'
@@ -8,7 +8,9 @@ import { PlayerPhoto } from './PlayerPhoto'
 
 export function Legends() {
   const [variant, setVariant] = useState<LegendVariantInfo>(LEGEND_VARIANTS[0])
-  const price = SITE.prices.legends[variant.key]
+  const prices = LEGENDS.map((l) => legendPrice(l.slug, variant.key))
+  const cheapest = Math.min(...prices)
+  const priciest = Math.max(...prices)
 
   return (
     <section id="legends" className="border-b border-line bg-ink">
@@ -53,12 +55,18 @@ export function Legends() {
         </div>
 
         <p className="mt-6 text-sm font-bold text-gold-200">
-          Variação {variant.label} · {formatBRL(price)} por figurinha
+          Variação {variant.label} · de {formatBRL(cheapest)} a {formatBRL(priciest)}, conforme o
+          craque
         </p>
 
         <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-5">
           {LEGENDS.map((legend) => (
-            <LegendCard key={legend.slug} legend={legend} variant={variant} price={price} />
+            <LegendCard
+              key={legend.slug}
+              legend={legend}
+              variant={variant}
+              price={legendPrice(legend.slug, variant.key)}
+            />
           ))}
         </div>
       </div>

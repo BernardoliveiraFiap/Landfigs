@@ -1,10 +1,11 @@
 import { SITE } from '../config/site'
+import { FWC_CARDS } from '../data/fwc'
 import { MASCOTS_AND_TROPHY, STADIUMS } from '../data/specials'
 import type { SpecialItem } from '../data/types'
 import { formatBRL } from '../lib/format'
 import { AddControl } from './AddControl'
 import { SectionHeading } from './SectionHeading'
-import { IconStadium, IconTrophy } from './icons'
+import { IconStadium, IconTag, IconTrophy } from './icons'
 
 export function Specials() {
   return (
@@ -44,6 +45,29 @@ export function Specials() {
               </article>
             )
           })}
+        </div>
+
+        <h3 className="mt-14 flex items-center gap-2 text-lg font-extrabold">
+          <IconTag className="size-5 text-grass-600" />
+          Cartas FWC · seção de abertura do álbum
+        </h3>
+        <p className="mt-1 text-sm text-ink-soft">
+          As especiais numeradas da abertura. Cada carta tem seu preço; você fecha o número exato
+          na conversa.
+        </p>
+        <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          {FWC_CARDS.map((c) => (
+            <div key={c.id} className="card flex items-center justify-between gap-2 px-4 py-3">
+              <div className="min-w-0">
+                <p className="truncate text-sm font-bold">{c.title}</p>
+                <p className="truncate text-xs text-ink-soft">{c.subtitle}</p>
+              </div>
+              <div className="flex shrink-0 items-center gap-2">
+                <span className="text-sm font-extrabold">{formatBRL(c.price)}</span>
+                <AddControl id={c.id} price={c.price} itemLabel={c.title} compact />
+              </div>
+            </div>
+          ))}
         </div>
 
         <h3 className="mt-14 flex items-center gap-2 text-lg font-extrabold">

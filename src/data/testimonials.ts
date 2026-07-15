@@ -36,7 +36,7 @@ export const TESTIMONIALS: readonly Testimonial[] = deepFreeze([
   {
     name: 'Ana Beatriz',
     city: 'Recife · PE',
-    text: 'Comprei o elenco completo da Espanha por R$ 104 pro meu filho. Veio tudo certinho, conferido figurinha por figurinha na conversa.',
+    text: 'Comprei o elenco completo da Espanha pro meu filho. Veio tudo certinho, conferido figurinha por figurinha na conversa, e ainda combinamos o Lamine Yamal à parte.',
     rating: 5,
   },
   {
@@ -66,7 +66,7 @@ export const TESTIMONIALS: readonly Testimonial[] = deepFreeze([
   {
     name: 'Felipe A.',
     city: 'Fortaleza · CE',
-    text: 'Os R$ 4 dos semifinalistas valem muito: em outro lugar o Mbappé avulso estava o triplo. Já garanti os meus antes da final.',
+    text: 'Os R$ 4 por jogador dos semifinalistas valem muito: montei quase todo o meio-campo da França sem pesar no bolso. Já garanti os meus antes da final.',
     rating: 5,
   },
   {

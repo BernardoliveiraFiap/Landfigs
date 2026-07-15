@@ -188,8 +188,8 @@ export function Hero() {
             </div>
 
             <p className="text-center text-sm font-bold text-gold-200">
-              Qualquer jogador dos 4 semifinalistas por{' '}
-              {formatBRL(SITE.prices.playerSemifinalist)}
+              Semifinalistas a partir de {formatBRL(SITE.prices.playerSemifinalist)}, craques
+              com preço marcado na figurinha
             </p>
           </div>
         </div>

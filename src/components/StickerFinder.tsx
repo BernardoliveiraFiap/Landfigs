@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react'
-import { SITE } from '../config/site'
+import { CATALOG, priceOf } from '../data/catalog'
 import { ALBUM_PLAYERS } from '../data/albumPlayers'
+import { FWC_CARDS } from '../data/fwc'
 import { LEGENDS, LEGEND_VARIANTS } from '../data/legends'
 import { MASCOTS_AND_TROPHY, STADIUMS } from '../data/specials'
 import { SQUADS } from '../data/squads'
@@ -57,18 +58,24 @@ const COLOR_TABS: ReadonlyArray<readonly [ColorKey | null, string]> = [
   ['ouro', 'Ouro'],
 ]
 
+/** Sublabel do catálogo (traz as marcações de faixa: super-craque, difícil de tirar). */
+function detailOf(id: string, fallback: string): string {
+  return CATALOG.get(id)?.sublabel ?? fallback
+}
+
 function buildIndex(): FinderEntry[] {
   const entries: FinderEntry[] = []
 
   for (const squad of SQUADS) {
     for (const p of squad.players) {
+      const id = `sf:${squad.iso}:${p.number}`
       entries.push({
-        id: `sf:${squad.iso}:${p.number}`,
+        id,
         display: `${p.name} #${p.number}`,
-        detail: `${squad.countryPt} · semifinalista`,
+        detail: detailOf(id, `${squad.countryPt} · semifinalista`),
         iso: squad.iso,
         color: 'base',
-        price: SITE.prices.playerSemifinalist,
+        price: priceOf(id),
         haystack: normalizeText(`${p.name} ${squad.countryPt} ${p.position} semifinalista`),
         featured: p.star,
       })
@@ -80,23 +87,24 @@ function buildIndex(): FinderEntry[] {
     entries.push({
       id: ap.id,
       display: ap.name,
-      detail: `${team} · figurinha base`,
+      detail: detailOf(ap.id, `${team} · figurinha base`),
       iso: ap.iso,
       color: 'base',
-      price: SITE.prices.playerRegular,
+      price: priceOf(ap.id),
       haystack: normalizeText(`${ap.name} ${team}`),
     })
   }
 
   for (const legend of LEGENDS) {
     for (const v of LEGEND_VARIANTS) {
+      const id = `lg:${legend.slug}:${v.key}`
       entries.push({
-        id: `lg:${legend.slug}:${v.key}`,
+        id,
         display: legend.name,
         detail: `Legend ${v.label} · ${legend.countryPt}`,
         iso: legend.iso,
         color: v.key,
-        price: SITE.prices.legends[v.key],
+        price: priceOf(id),
         haystack: normalizeText(
           `${legend.name} ${(legend.aliases ?? []).join(' ')} ${legend.countryPt} legend extra sticker`,
         ),
@@ -106,14 +114,15 @@ function buildIndex(): FinderEntry[] {
   }
 
   for (const t of TEAMS) {
+    const id = `tm:${t.iso}:badge`
     entries.push({
-      id: `tm:${t.iso}:badge`,
+      id,
       display: `Escudo ${t.namePt}`,
-      detail: 'figurinha metalizada do brasão',
+      detail: `escudo cromado · ${t.badgeTier}`,
       iso: t.iso,
       color: 'base',
-      price: SITE.prices.badge,
-      haystack: normalizeText(`escudo brasao ${t.namePt} metalizada`),
+      price: priceOf(id),
+      haystack: normalizeText(`escudo brasao ${t.namePt} metalizada cromado`),
     })
   }
 
@@ -128,6 +137,18 @@ function buildIndex(): FinderEntry[] {
       color: 'base',
       price: s.price,
       haystack: normalizeText(`${s.title} ${s.subtitle} especial`),
+    })
+  }
+
+  for (const c of FWC_CARDS) {
+    entries.push({
+      id: c.id,
+      display: c.title,
+      detail: c.subtitle,
+      iso: null,
+      color: 'base',
+      price: c.price,
+      haystack: normalizeText(`${c.title} fwc ${c.number} especial abertura`),
     })
   }
 

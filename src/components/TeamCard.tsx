@@ -1,12 +1,21 @@
 import { SITE } from '../config/site'
+import { priceOf } from '../data/catalog'
 import { SEMIFINALIST_ISOS } from '../data/squads'
 import type { Team } from '../data/types'
 import { formatBRL } from '../lib/format'
 import { AddControl } from './AddControl'
 import { IconStar } from './icons'
 
+/** Rótulo da faixa de raridade do escudo cromado. */
+const BADGE_TIER_LABEL: Readonly<Record<Team['badgeTier'], string>> = {
+  raro: 'raro, quase não sai nos pacotes',
+  mediano: 'procurado',
+  comum: 'brasão metalizado',
+}
+
 export function TeamCard({ team }: { team: Team }) {
   const isSemi = SEMIFINALIST_ISOS.has(team.iso)
+  const isBrazil = team.iso === 'br'
 
   return (
     <article className={`card flex flex-col gap-4 p-4 ${isSemi ? 'border-gold-300' : ''}`}>
@@ -37,7 +46,7 @@ export function TeamCard({ team }: { team: Team }) {
           <li className="flex items-center justify-between gap-2 px-3 py-2.5">
             <div>
               <p className="text-sm font-bold">
-                Jogadores por {formatBRL(SITE.prices.playerSemifinalist)}
+                Jogadores a partir de {formatBRL(SITE.prices.playerSemifinalist)}
               </p>
               <p className="text-xs text-ink-soft">os 26 convocados, um a um</p>
             </div>
@@ -52,23 +61,25 @@ export function TeamCard({ team }: { team: Team }) {
           <li className="flex items-center justify-between gap-2 px-3 py-2.5">
             <div>
               <p className="text-sm font-bold">Jogador avulso</p>
-              <p className="text-xs text-ink-soft">nº combinado no WhatsApp</p>
+              <p className="text-xs text-ink-soft">
+                {isBrazil ? 'qualquer um do elenco (Vini Jr à parte)' : 'nº combinado no WhatsApp'}
+              </p>
             </div>
             <AddControl
               id={`tm:${team.iso}:player`}
-              price={SITE.prices.playerRegular}
+              price={priceOf(`tm:${team.iso}:player`)}
               itemLabel={`Jogador avulso da seleção: ${team.namePt}`}
             />
           </li>
         )}
         <li className="flex items-center justify-between gap-2 px-3 py-2.5">
           <div>
-            <p className="text-sm font-bold">Escudo oficial</p>
-            <p className="text-xs text-ink-soft">figurinha metalizada do brasão</p>
+            <p className="text-sm font-bold">Escudo cromado</p>
+            <p className="text-xs text-ink-soft">{BADGE_TIER_LABEL[team.badgeTier]}</p>
           </div>
           <AddControl
             id={`tm:${team.iso}:badge`}
-            price={SITE.prices.badge}
+            price={priceOf(`tm:${team.iso}:badge`)}
             itemLabel={`Escudo da seleção: ${team.namePt}`}
           />
         </li>
