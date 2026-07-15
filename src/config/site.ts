@@ -126,37 +126,37 @@ export const SITE = deepFreeze({
 
     /**
      * Panini Extra Stickers (Legends) — 20 craques em 4 variações de cor
-     * (Roxa, Bronze, Prata e Ouro, em ordem crescente de raridade).
-     * Preço por craque e por cor: craque maior + cor mais rara = mais caro.
+     * (Roxa/regular, Bronze, Prata e Ouro, em ordem crescente de raridade).
      *
-     * Âncoras de mercado (revenda avulsa BR, pesquisa 15/07/2026): Roxa ~R$150,
-     * Bronze ~R$200, Prata R$180–400, Ouro R$300–5000 (Messi ouro ~R$1000).
-     * 3 faixas de craque; a cor é o principal driver, o craque puxa o topo (Ouro).
+     * A ROXA segue as faixas de relevância definidas pelo Cauê (15/07/2026):
+     * top R$130 a 150, médios R$110 a 120, menos relevantes R$80 a 100.
+     * Bronze, Prata e Ouro seguem a raridade da cor (mais rara = mais cara),
+     * com o craque puxando o topo, ancorados no mercado de revenda BR.
      */
     legends: {
-      // ícones — os mais cobiçados na revenda
-      messi: { regular: 199.0, bronze: 279.0, prata: 449.0, ouro: 999.0 },
-      cristiano: { regular: 199.0, bronze: 279.0, prata: 449.0, ouro: 999.0 },
-      // craques globais
-      mbappe: { regular: 169.0, bronze: 229.0, prata: 339.0, ouro: 649.0 },
-      yamal: { regular: 169.0, bronze: 229.0, prata: 339.0, ouro: 649.0 },
-      vinicius: { regular: 169.0, bronze: 229.0, prata: 339.0, ouro: 649.0 },
-      haaland: { regular: 169.0, bronze: 229.0, prata: 339.0, ouro: 649.0 },
-      bellingham: { regular: 169.0, bronze: 229.0, prata: 339.0, ouro: 649.0 },
-      salah: { regular: 169.0, bronze: 229.0, prata: 339.0, ouro: 649.0 },
-      // demais Legends — piso de mercado
-      modric: { regular: 149.0, bronze: 199.0, prata: 299.0, ouro: 499.0 },
-      son: { regular: 149.0, bronze: 199.0, prata: 299.0, ouro: 499.0 },
-      wirtz: { regular: 149.0, bronze: 199.0, prata: 299.0, ouro: 499.0 },
-      hakimi: { regular: 149.0, bronze: 199.0, prata: 299.0, ouro: 499.0 },
-      gakpo: { regular: 149.0, bronze: 199.0, prata: 299.0, ouro: 499.0 },
-      doku: { regular: 149.0, bronze: 199.0, prata: 299.0, ouro: 499.0 },
-      'luis-diaz': { regular: 149.0, bronze: 199.0, prata: 299.0, ouro: 499.0 },
-      valverde: { regular: 149.0, bronze: 199.0, prata: 299.0, ouro: 499.0 },
-      caicedo: { regular: 149.0, bronze: 199.0, prata: 299.0, ouro: 499.0 },
-      pulisic: { regular: 149.0, bronze: 199.0, prata: 299.0, ouro: 499.0 },
-      davies: { regular: 149.0, bronze: 199.0, prata: 299.0, ouro: 499.0 },
-      jimenez: { regular: 149.0, bronze: 199.0, prata: 299.0, ouro: 499.0 },
+      // top (Roxa 130 a 150)
+      messi: { regular: 150.0, bronze: 279.0, prata: 449.0, ouro: 999.0 },
+      cristiano: { regular: 150.0, bronze: 279.0, prata: 449.0, ouro: 999.0 },
+      mbappe: { regular: 150.0, bronze: 229.0, prata: 339.0, ouro: 649.0 },
+      vinicius: { regular: 145.0, bronze: 229.0, prata: 339.0, ouro: 649.0 },
+      yamal: { regular: 145.0, bronze: 229.0, prata: 339.0, ouro: 649.0 },
+      haaland: { regular: 140.0, bronze: 229.0, prata: 339.0, ouro: 649.0 },
+      bellingham: { regular: 135.0, bronze: 229.0, prata: 339.0, ouro: 649.0 },
+      salah: { regular: 130.0, bronze: 229.0, prata: 339.0, ouro: 649.0 },
+      // médios (Roxa 110 a 120)
+      modric: { regular: 120.0, bronze: 199.0, prata: 299.0, ouro: 499.0 },
+      son: { regular: 120.0, bronze: 199.0, prata: 299.0, ouro: 499.0 },
+      wirtz: { regular: 115.0, bronze: 199.0, prata: 299.0, ouro: 499.0 },
+      hakimi: { regular: 115.0, bronze: 199.0, prata: 299.0, ouro: 499.0 },
+      valverde: { regular: 110.0, bronze: 199.0, prata: 299.0, ouro: 499.0 },
+      'luis-diaz': { regular: 110.0, bronze: 199.0, prata: 299.0, ouro: 499.0 },
+      // menos relevantes (Roxa 80 a 100)
+      gakpo: { regular: 100.0, bronze: 199.0, prata: 299.0, ouro: 499.0 },
+      doku: { regular: 95.0, bronze: 199.0, prata: 299.0, ouro: 499.0 },
+      pulisic: { regular: 90.0, bronze: 199.0, prata: 299.0, ouro: 499.0 },
+      caicedo: { regular: 90.0, bronze: 199.0, prata: 299.0, ouro: 499.0 },
+      davies: { regular: 85.0, bronze: 199.0, prata: 299.0, ouro: 499.0 },
+      jimenez: { regular: 80.0, bronze: 199.0, prata: 299.0, ouro: 499.0 },
     },
   },
 
