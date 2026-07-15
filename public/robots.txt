@@ -9,4 +9,4 @@ Allow: /
 # User-agent: CCBot
 # Disallow: /
 
-Sitemap: https://craquebox.vercel.app/sitemap.xml
+Sitemap: https://craquebox.com/sitemap.xml
