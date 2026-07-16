@@ -29,9 +29,10 @@ npm run preview   # serve o build local
 ## Onde mudar preço, número do WhatsApp e limites
 
 **Os valores em R$ vivem só em** [`src/config/site.ts`](src/config/site.ts)
-(objeto congelado): jogador base (comum/escasso/semifinalista/Brasil), tabela
-individual de super-craques, escudo por faixa (raro/mediano/comum), cartas FWC,
-mascotes, taça, estádios e a matriz de Legends (craque × cor). Também ali ficam
+(objeto congelado): jogador comum (`playerRegular` + exceções por seleção em
+`playerRegularByIso`), escasso, semifinalista, tabela individual de
+super-craques, escudo por faixa (raro/mediano/comum), cartas FWC, mascotes,
+taça, estádios e a matriz de Legends (craque × cor). Também ali ficam
 número do WhatsApp, limites do carrinho e throttle do checkout.
 
 Duas classificações (quem entra em cada faixa, não o preço) ficam nos dados:
@@ -41,8 +42,10 @@ Duas classificações (quem entra em cada faixa, não o preço) ficam nos dados:
   [`src/data/scarce.ts`](src/data/scarce.ts) (hoje vazia — ver comentário no arquivo).
 
 Quem resolve o preço final de cada item é [`src/data/catalog.ts`](src/data/catalog.ts),
-na ordem: super-craque → Brasil → escasso → base. Ele valida em dev que todo
-super-craque/escasso aponta para um jogador real do álbum.
+na ordem: super-craque → escasso → semifinalista → base da seleção
+(`playerRegularByIso` ou `playerRegular`). Ele valida em dev que todo
+super-craque/escasso aponta para um jogador real do álbum e que as exceções
+de base apontam para seleções reais fora das semifinais.
 
 ## Estrutura de dados
 
@@ -58,8 +61,9 @@ super-craque/escasso aponta para um jogador real do álbum.
 | `src/data/catalog.ts` | Catálogo derivado — todo item vendável, com preço vindo de `site.ts` |
 
 Tipos de figurinha à venda: jogadores dos 4 semifinalistas (um a um), jogador
-avulso das demais 44 seleções, escudos, Legends nas variações Roxa/Bronze/
-Prata/Ouro, mascotes, taça e estádios.
+avulso das demais 44 seleções, super-craques com preço próprio, escudos cromados
+por faixa, cartas FWC, Legends nas variações Roxa/Bronze/Prata/Ouro, mascotes,
+taça e estádios.
 
 ## Deploy na Vercel (plano gratuito)
 

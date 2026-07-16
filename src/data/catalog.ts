@@ -16,25 +16,32 @@ import type { CatalogItem, LegendVariant } from './types'
  *
  * Preço de jogador, em ordem de prioridade:
  * 1. SITE.prices.superCraques[id]  (craque com preço individual)
- * 2. SITE.prices.playerBrazil      (qualquer jogador do Brasil)
- * 3. SITE.prices.playerScarce      (difícil de tirar — data/scarce.ts)
- * 4. playerSemifinalist / playerRegular (preço base)
+ * 2. SITE.prices.playerScarce      (difícil de tirar — data/scarce.ts)
+ * 3. SITE.prices.playerSemifinalist (França, Espanha, Inglaterra, Argentina)
+ * 4. SITE.prices.playerRegularByIso[iso] ?? playerRegular (tabela MGA de comuns)
  */
 
 const SUPER_CRAQUES: ReadonlyMap<string, number> = new Map(
   Object.entries(SITE.prices.superCraques),
 )
 
+const REGULAR_BY_ISO: Readonly<Partial<Record<string, number>>> = SITE.prices.playerRegularByIso
+
 const LEGEND_PRICES: ReadonlyMap<string, Readonly<Record<LegendVariant, number>>> = new Map(
   Object.entries(SITE.prices.legends),
 )
 
+/** Preço base do jogador comum de uma seleção fora das semifinais. */
+export function regularPlayerPrice(iso: string): number {
+  return REGULAR_BY_ISO[iso] ?? SITE.prices.playerRegular
+}
+
 export function playerPrice(id: string, iso: string): number {
   const craque = SUPER_CRAQUES.get(id)
   if (craque !== undefined) return craque
-  if (iso === 'br') return SITE.prices.playerBrazil
   if (SCARCE_PLAYER_IDS.has(id)) return SITE.prices.playerScarce
-  return SEMIFINALIST_ISOS.has(iso) ? SITE.prices.playerSemifinalist : SITE.prices.playerRegular
+  if (SEMIFINALIST_ISOS.has(iso)) return SITE.prices.playerSemifinalist
+  return regularPlayerPrice(iso)
 }
 
 export function legendPrice(slug: string, variant: LegendVariant): number {
@@ -44,9 +51,8 @@ export function legendPrice(slug: string, variant: LegendVariant): number {
 }
 
 /** Rótulo curto da faixa do jogador, usado nos sublabels do catálogo. */
-function playerBadgeLabel(id: string, iso: string): string {
+function playerBadgeLabel(id: string): string {
   if (SUPER_CRAQUES.has(id)) return ' · super-craque'
-  if (iso === 'br') return ''
   if (SCARCE_PLAYER_IDS.has(id)) return ' · difícil de tirar'
   return ''
 }
@@ -72,7 +78,7 @@ function buildCatalog(): CatalogItem[] {
     items.push({
       id: ap.id,
       label: ap.name,
-      sublabel: `${teamName.get(ap.iso) ?? ap.iso} · figurinha base${playerBadgeLabel(ap.id, ap.iso)}`,
+      sublabel: `${teamName.get(ap.iso) ?? ap.iso} · figurinha base${playerBadgeLabel(ap.id)}`,
       price: playerPrice(ap.id, ap.iso),
       kind: 'player-regular',
     })
@@ -84,7 +90,7 @@ function buildCatalog(): CatalogItem[] {
         id: `tm:${team.iso}:player`,
         label: `Jogador avulso · ${team.namePt}`,
         sublabel: 'nº da figurinha combinado no WhatsApp',
-        price: team.iso === 'br' ? SITE.prices.playerBrazil : SITE.prices.playerRegular,
+        price: regularPlayerPrice(team.iso),
         kind: 'player-regular',
       })
     }
@@ -150,6 +156,14 @@ export function priceOf(id: string): number {
 if (import.meta.env.DEV) {
   for (const id of SUPER_CRAQUES.keys()) {
     if (!CATALOG.has(id)) throw new Error(`superCraques aponta para id inexistente: ${id}`)
+  }
+  for (const iso of Object.keys(SITE.prices.playerRegularByIso)) {
+    if (!TEAMS.some((t) => t.iso === iso)) {
+      throw new Error(`playerRegularByIso aponta para iso inexistente: ${iso}`)
+    }
+    if (SEMIFINALIST_ISOS.has(iso)) {
+      throw new Error(`playerRegularByIso não se aplica a semifinalista: ${iso}`)
+    }
   }
   for (const id of SCARCE_PLAYER_IDS) {
     if (!CATALOG.has(id)) throw new Error(`scarce.ts aponta para id inexistente: ${id}`)

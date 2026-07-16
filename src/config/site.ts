@@ -23,18 +23,33 @@ export const SITE = deepFreeze({
   prices: {
     /** Preço base de jogador de França, Espanha, Inglaterra ou Argentina. */
     playerSemifinalist: 4.0,
-    /** Preço base do jogador avulso das demais 44 seleções (número combinado no WhatsApp). */
-    playerRegular: 2.0,
+    /**
+     * Preço base do jogador comum avulso das demais seleções, seguindo a
+     * tabela de jogadores comuns da MGA Figurinhas (mgafigurinhas.com.br,
+     * conferida figurinha a figurinha em 16/07/2026).
+     */
+    playerRegular: 1.5,
+    /**
+     * Exceções ao base na mesma tabela: seleções cujo jogador comum avulso
+     * custa mais no mercado pela procura. Semifinalistas não entram aqui
+     * (têm regra própria); catalog.ts valida em dev.
+     */
+    playerRegularByIso: {
+      br: 10.0, // Brasil
+      cd: 5.0, // RD do Congo (figurinhas que menos saem nos pacotes)
+      mx: 3.0, // México
+      kr: 3.0, // Coreia do Sul
+    },
     /**
      * Jogador comum difícil de tirar nos pacotes (menor taxa de aparição).
      * Quem entra nesta faixa está listado em src/data/scarce.ts.
      */
     playerScarce: 3.0,
-    /** Qualquer jogador do Brasil. Exceção única: Vini Jr, tabelado em superCraques. */
-    playerBrazil: 5.0,
 
     /**
-     * Super-craques com preço individual, por relevância atual e trajetória.
+     * Super craques com preço individual, por relevância atual e trajetória
+     * (regra Cauê 16/07/2026): toda seleção tem pelo menos um super craque,
+     * de R$10 a R$30; quem não está aqui é jogador comum e segue o preço base.
      * Chave = id de catálogo: sf:<iso>:<número> (semifinalistas) ou
      * pl:<iso>:<slug> (demais seleções). Tem prioridade sobre os preços base.
      */
@@ -42,57 +57,74 @@ export const SITE = deepFreeze({
       // ícones globais
       'sf:ar:10': 30.0, // Messi
       'pl:pt:cristiano-ronaldo': 30.0, // Cristiano Ronaldo
-      'sf:fr:10': 25.0, // Mbappé
-      'sf:es:19': 25.0, // Lamine Yamal
-      'pl:br:vini-jr': 20.0, // Vini Jr (exceção fixada da regra do Brasil)
+      'sf:fr:10': 20.0, // Mbappé
       // elite atual
+      'pl:br:vini-jr': 15.0, // Vini Jr
+      'sf:es:19': 15.0, // Lamine Yamal
       'pl:no:haaland': 15.0, // Haaland
       'sf:gb-eng:10': 15.0, // Bellingham
+      // estrelas de primeira linha
       'sf:gb-eng:9': 12.0, // Kane
       'sf:fr:11': 12.0, // Dembélé
       'pl:eg:mohamed-salah': 12.0, // Salah
-      'pl:hr:modric': 12.0, // Modrić
       'pl:de:wirtz': 12.0, // Wirtz
-      // estrelas consagradas e em alta
+      'pl:br:raphinha': 12.0, // Raphinha
+      'pl:br:neymar-jr': 12.0, // Neymar Jr (figurinha do Update Set)
+      'pl:uy:federico-valverde': 12.0, // Valverde
+      'pl:co:luis-diaz': 12.0, // Luis Díaz
+      // o super craque de cada seleção
       'sf:es:16': 10.0, // Rodri
       'sf:es:20': 10.0, // Pedri
       'sf:ar:9': 10.0, // Julián Álvarez
       'sf:ar:22': 10.0, // Lautaro Martínez
-      'pl:de:musiala': 10.0, // Musiala
+      'sf:gb-eng:7': 10.0, // Saka
+      'pl:hr:modric': 10.0, // Modrić
       'pl:kr:son-heung-min': 10.0, // Son Heung-min
       'pl:be:de-bruyne': 10.0, // De Bruyne
-      'pl:ma:hakimi': 10.0, // Hakimi
-      'pl:tr:arda-guler': 10.0, // Arda Güler
+      'pl:be:doku': 10.0, // Doku
+      'pl:de:musiala': 10.0, // Musiala
+      'pl:pt:bruno-fernandes': 10.0, // Bruno Fernandes
+      'pl:pt:vitinha': 10.0, // Vitinha
+      'pl:nl:virgil-van-dijk': 10.0, // Van Dijk
+      'pl:nl:frenkie-de-jong': 10.0, // Frenkie de Jong
+      'pl:nl:memphis-depay': 10.0, // Memphis Depay
+      'pl:no:degaard': 10.0, // Ødegaard (slug perde o Ø no normalize)
       'pl:se:gyokeres': 10.0, // Gyökeres
       'pl:se:isak': 10.0, // Isak
-      // destaques
-      'sf:gb-eng:7': 8.0, // Saka
-      'sf:ar:23': 8.0, // Dibu Martínez
-      'sf:ar:24': 8.0, // Enzo Fernández
-      'sf:ar:20': 8.0, // Mac Allister
-      'sf:es:17': 8.0, // Nico Williams
-      'pl:pt:bruno-fernandes': 8.0, // Bruno Fernandes
-      'pl:pt:rafael-leao': 8.0, // Rafael Leão
-      'pl:nl:gakpo': 8.0, // Gakpo
-      'pl:nl:frenkie-de-jong': 8.0, // Frenkie de Jong
-      'pl:nl:virgil-van-dijk': 8.0, // Van Dijk
-      'pl:sn:sadio-mane': 8.0, // Sadio Mané
-      'pl:co:luis-diaz': 8.0, // Luis Díaz
-      'pl:co:james-rodriguez': 8.0, // James Rodríguez
-      'pl:uy:federico-valverde': 8.0, // Valverde
-      'pl:ec:moises-caicedo': 8.0, // Moisés Caicedo
-      'pl:ca:alphonso-davies': 8.0, // Alphonso Davies
-      'pl:us:christian-pulisic': 8.0, // Pulisic
-      'pl:eg:marmoush': 8.0, // Marmoush
-      'pl:uy:darwin-nunez': 6.0, // Darwin Núñez
-      'pl:ca:jonathan-david': 6.0, // Jonathan David
-      'pl:mx:santiago-gimenez': 6.0, // Santiago Giménez
-      'pl:mx:raul-jimenez': 6.0, // Raúl Jiménez
-      'pl:mx:guillermo-ochoa': 6.0, // Ochoa
-      'pl:jp:takefusa-kubo': 6.0, // Kubo
-      'pl:dz:mahrez': 6.0, // Mahrez
-      'pl:be:doku': 6.0, // Doku
-      'pl:ba:edin-dzeko': 6.0, // Džeko
+      'pl:tr:arda-guler': 10.0, // Arda Güler
+      'pl:ma:hakimi': 10.0, // Hakimi
+      'pl:eg:marmoush': 10.0, // Marmoush
+      'pl:sn:sadio-mane': 10.0, // Sadio Mané
+      'pl:dz:mahrez': 10.0, // Mahrez
+      'pl:co:james-rodriguez': 10.0, // James Rodríguez
+      'pl:ec:moises-caicedo': 10.0, // Moisés Caicedo
+      'pl:ca:alphonso-davies': 10.0, // Alphonso Davies
+      'pl:us:christian-pulisic': 10.0, // Pulisic
+      'pl:mx:santiago-gimenez': 10.0, // Santiago Giménez
+      'pl:jp:takefusa-kubo': 10.0, // Kubo
+      'pl:ba:edin-dzeko': 10.0, // Džeko
+      'pl:cz:schick': 10.0, // Schick
+      'pl:ch:xhaka': 10.0, // Xhaka
+      'pl:qa:akram-afif': 10.0, // Akram Afif
+      'pl:za:lyle-foster': 10.0, // Lyle Foster
+      'pl:ht:wilson-isidor': 10.0, // Wilson Isidor
+      'pl:gb-sct:scott-mctominay': 10.0, // McTominay
+      'pl:py:julio-enciso': 10.0, // Julio Enciso
+      'pl:au:jackson-irvine': 10.0, // Jackson Irvine
+      'pl:cw:tahith-chong': 10.0, // Tahith Chong
+      'pl:ci:amad-diallo': 10.0, // Amad Diallo
+      'pl:tn:hannibal-mejbri': 10.0, // Hannibal Mejbri
+      'pl:ir:mehdi-taremi': 10.0, // Mehdi Taremi
+      'pl:nz:chris-wood': 10.0, // Chris Wood
+      'pl:sa:salem-al-dawsari': 10.0, // Salem Al Dawsari
+      'pl:cv:ryan-mendes': 10.0, // Ryan Mendes
+      'pl:iq:aymen-hussein': 10.0, // Aymen Hussein
+      'pl:jo:musa-al-tamari': 10.0, // Musa Al-Tamari
+      'pl:at:alaba': 10.0, // Alaba
+      'pl:uz:abduqodir-husanov': 10.0, // Husanov
+      'pl:cd:yoane-wissa': 10.0, // Yoane Wissa
+      'pl:gh:semenyo': 10.0, // Semenyo
+      'pl:pa:adalberto-carrasquilla': 10.0, // Carrasquilla
     },
 
     /**
