@@ -22,6 +22,13 @@ Mudanças relevantes do CraqueBox. Datas em AAAA-MM-DD.
   semifinalista → base da seleção, com validação em dev dos isos das exceções.
 - FAQ de preços reescrita para a regra nova.
 
+### Interface
+
+- Depoimentos deixaram o grid irregular (colunas com alturas quebradas) e
+  viraram duas esteiras contínuas de sentidos opostos, no padrão da faixa de
+  seleções: pausa no hover, cards de altura uniforme com rodapé alinhado,
+  aspas decorativa e realce sutil na borda.
+
 ## 2026-07-15
 
 ### Preços (revisão da tabela)
