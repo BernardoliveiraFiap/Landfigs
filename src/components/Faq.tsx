@@ -4,9 +4,13 @@ import { SectionHeading } from './SectionHeading'
 import { IconPlus } from './icons'
 
 const regularPrice = formatBRL(SITE.prices.playerRegular)
-const scarcePrice = formatBRL(SITE.prices.playerScarce)
 const semiPrice = formatBRL(SITE.prices.playerSemifinalist)
-const brazilPrice = formatBRL(SITE.prices.playerBrazil)
+const brazilPrice = formatBRL(SITE.prices.playerRegularByIso.br)
+const mexicoKoreaPrice = formatBRL(SITE.prices.playerRegularByIso.mx)
+const congoPrice = formatBRL(SITE.prices.playerRegularByIso.cd)
+const craqueValues = Object.values(SITE.prices.superCraques)
+const craqueMin = formatBRL(Math.min(...craqueValues))
+const craqueMax = formatBRL(Math.max(...craqueValues))
 const viniPrice = formatBRL(SITE.prices.superCraques['pl:br:vini-jr'])
 
 const FAQS: ReadonlyArray<readonly [string, string]> = [
@@ -32,7 +36,7 @@ const FAQS: ReadonlyArray<readonly [string, string]> = [
   ],
   [
     'Como funciona a tabela de preços?',
-    `Tudo fixo e tabelado, sem leilão: jogador comum sai por ${regularPrice} e os apontados pela comunidade como difíceis de tirar, por ${scarcePrice}. Jogadores de França, Espanha, Inglaterra e Argentina (semifinalistas) custam ${semiPrice}. Super-craques como Messi, Cristiano Ronaldo, Mbappé e Lamine Yamal têm preço individual, sempre marcado na figurinha. No Brasil, qualquer jogador sai por ${brazilPrice}, com uma única exceção: Vini Jr, por ${viniPrice}.`,
+    `Tudo fixo e tabelado, sem leilão. Jogador comum sai por ${regularPrice}, seguindo a tabela de avulsas praticada no mercado; as exceções são México e Coreia do Sul (${mexicoKoreaPrice}), RD do Congo (${congoPrice}) e Brasil (${brazilPrice}). Jogadores de França, Espanha, Inglaterra e Argentina (semifinalistas) custam ${semiPrice}. E toda seleção tem pelo menos um super craque com preço individual, de ${craqueMin} a ${craqueMax}, sempre marcado na figurinha: Messi e Cristiano Ronaldo no topo da tabela, Vini Jr por ${viniPrice}.`,
   ],
   [
     'Por que alguns escudos custam mais que outros?',

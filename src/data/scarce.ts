@@ -15,8 +15,9 @@ import { slugify } from '../lib/slug'
  * ser IDÊNTICOS aos de albumPlayers.ts / squads.ts (geram o id pl:<iso>:<slug>
  * ou sf:<iso>:<número>); catalog.ts valida em dev e quebra se algum não casar.
  *
- * Brasil não entra: lá vale a tabela própria (playerBrazil e a exceção do
- * Vini Jr). Semifinalistas também não: o preço base deles (R$4) já supera R$3.
+ * Seleções com preço base próprio em playerRegularByIso (Brasil, RD do Congo,
+ * México e Coreia do Sul) não entram: o base delas já é igual ou maior que R$3.
+ * Semifinalistas também não: o preço base deles (R$4) já supera R$3.
  */
 const RAW: ReadonlyArray<readonly [iso: string, players: readonly string[]]> = [
   // sem dado confiável em 15/07/2026 — preencher com a experiência de estoque da loja
